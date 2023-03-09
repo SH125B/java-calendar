@@ -23,7 +23,7 @@ public class Calendar {
 	
 	public static void main(String[] args) {
 
-		
+		String prom = "Month> ";
 		System.out.println("1월부터 12월까지 최대일수를 출력합니다.");
 		System.out.println("출력횟수를 입력하시오.");
 		
@@ -32,16 +32,22 @@ public class Calendar {
 		
 		
 		for(int i=0; i<times;i++) {
-		System.out.println("1부터 12까지 숫자중 하나를 입력하십시오.");
-		
-		int inputValue = scanner.nextInt();
-		System.out.printf("%d월의 마지막날은 %d일입니다.%n", inputValue, getLastdayOfMonths(inputValue));
-		System.out.println("-----------------------------");
-		
-		/* typing한 달력출력
-		Calendar cal = new Calendar();
-		cal.printSampleCalendar();
-		*/ 
+			System.out.println("1부터 12까지 숫자중 하나를 입력하십시오. 중간에 종료하려면 -1를 입력하십시오.");
+			System.out.print(prom);
+			int inputValue = scanner.nextInt();
+			
+			if (inputValue == -1) {
+				break;
+			} 
+			else {
+			System.out.printf("%d월의 마지막날은 %d일입니다.%n", inputValue, getLastdayOfMonths(inputValue));
+			System.out.println("-----------------------------");
+			
+			/* typing한 달력출력
+			Calendar cal = new Calendar();
+			cal.printSampleCalendar();
+			*/ 
+			}
 		}
 		System.out.println("출력을 종료합니다.");
 		scanner.close();
