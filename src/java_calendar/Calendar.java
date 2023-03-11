@@ -3,8 +3,21 @@ package java_calendar;
 public class Calendar {
 	
 	public static int[] lastdayOfMonths = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	public static int[] leapYearLastday = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+	public boolean isLeapYear(int year) {
+		
+		if ((year%4 == 0 && year%100 != 0) || year%400 == 0) {
+			return true;
+		}
+		return false;
+	}
 	
-	public int getLastdayOfMonths(int month) {
+	public int getLastdayOfMonths(int year, int month) {
+		if (isLeapYear(year) == true) {
+			return leapYearLastday[month-1];
+		}
+		
 		return lastdayOfMonths[month-1];
 	}
 
@@ -15,7 +28,7 @@ public class Calendar {
 		System.out.println("----------------------");
 
 		
-		int lastDay = getLastdayOfMonths(month);
+		int lastDay = getLastdayOfMonths(year, month);
 		for (int i=1; i<= lastDay; i++) {
 			System.out.printf("%3d", i);
 			if (i%7 ==0) {
