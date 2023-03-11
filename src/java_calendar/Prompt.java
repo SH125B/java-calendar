@@ -18,20 +18,29 @@ public class Prompt {
 			System.out.println("출력을 원하는 년도를 숫자로 입력하시오.");
 			System.out.print("Year> ");
 			int year = scanner.nextInt();
+			if (year == -1) {
+				break;
+			} 
 			
 			System.out.println("출력을 원하는 달을 숫자로 입력하시오. 중간에 종료하려면 -1를 입력하십시오.");
 			System.out.print(PROMPT);
 			int month = scanner.nextInt();
-			
+
 			if (month == -1) {
 				break;
 			} 
 			else {
+			System.out.println("첫번째 요일을 입력하시오. (su, mo, we, th, fr, sa)");
+			System.out.print("Weekday> ");
+			String weekday = scanner.next();
+				
 			System.out.printf("%d월의 마지막날은 %d일입니다.%n", month, cal.getLastdayOfMonths(year, month));
 			System.out.println("-----------------------------");
-			}
 			
-		cal.printCalendar(year, month);	
+			int firstdayIndex = cal.getIndexOfFirstday(weekday);
+			
+			cal.printCalendar(year, month, firstdayIndex);	
+			}
 			
 			/* 내 풀이
 			if (cal.getLastdayOfMonths(inputValue) == 31) {

@@ -4,6 +4,7 @@ public class Calendar {
 	
 	public static int[] lastdayOfMonths = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 	public static int[] leapYearLastday = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	public static String[] weekdays = {"su", "mo", "tu", "we", "th", "fr", "sa"};
 
 	public boolean isLeapYear(int year) {
 		
@@ -20,19 +21,48 @@ public class Calendar {
 		
 		return lastdayOfMonths[month-1];
 	}
-
-	public void printCalendar(int year, int month) {
+	
+	
+	public int getIndexOfFirstday(String weekday) {
+		int indexOfFirstday = 0;
 		
-		System.out.printf("     <%d년%3d월> \n", year, month);
+		for(int i=0; i<weekdays.length; i++) {
+			if(weekday.equals(weekdays[i])) {
+				indexOfFirstday = i;
+			}
+		}
+		return indexOfFirstday;
+	}
+	
+
+	public void printCalendar(int year, int month, int indexOfFirstday) {
+		
+		System.out.printf("     <%d년%2d월> \n", year, month);
 		System.out.println(" SU MO TU WE TH FR SA");
 		System.out.println("----------------------");
-
 		
+		for(int i=0;i<indexOfFirstday;i++) {
+			System.out.print("   ");
+		}
+		
+		// 달력 첫째줄
+		for (int i=1; i<=7-indexOfFirstday; i++) {
+			System.out.printf("%3d", i);			
+		}
+		System.out.println();
+		
+		//달력 둘째줄부터
 		int lastDay = getLastdayOfMonths(year, month);
-		for (int i=1; i<= lastDay; i++) {
-			System.out.printf("%3d", i);
-			if (i%7 ==0) {
+		int secondLineFirstNum = 8-indexOfFirstday;
+		int secondLineBlankCount = 0;
+		
+		for (int i=secondLineFirstNum; i<= lastDay; i++) {
+			System.out.printf("%3d", i);			
+			secondLineBlankCount++;
+			
+			if(secondLineBlankCount==7) {
 				System.out.println();
+				secondLineBlankCount=0;
 			}
 		}
 		System.out.println();
