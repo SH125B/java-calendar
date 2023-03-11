@@ -35,11 +35,14 @@ public class Calendar {
 	}
 	
 
-	public void printCalendar(int year, int month, int indexOfFirstday) {
+	public void printCalendar(int year, int month) {
 		
 		System.out.printf("     <%d년%2d월> \n", year, month);
 		System.out.println(" SU MO TU WE TH FR SA");
 		System.out.println("----------------------");
+		
+		// get indexOfFirstday automatically
+		int indexOfFirstday = getWeekdayIndex(year, month);
 		
 		for(int i=0;i<indexOfFirstday;i++) {
 			System.out.print("   ");
@@ -67,6 +70,30 @@ public class Calendar {
 		}
 		System.out.println();
 		
+	}
+
+	// 몇 번째 요일인지 구하기
+	private int getWeekdayIndex(int year, int month) {
+		int syear = 1970;
+		final int WEEKDAYINDDEX = 4; // 1970.01.1st = Thursday
+		
+		int count = 0;
+		
+		// 입력받은 달의 1일까지 몇 년 지났는지
+		for (int i=syear;i<year;i++) {
+			int totalDaysOfAYear = isLeapYear(i) ? 366 : 365 ;
+			count += totalDaysOfAYear;
+		}
+		
+		// 입력받은 달의 1일까지 몇 달 지났는지
+		for (int i =0; i < month-1; i++) {
+			int delta = getLastdayOfMonths(year, i+1);
+			count +=delta;
+		}
+		// 며칠 지났는지
+		
+		int weekdayIndex = (WEEKDAYINDDEX+count) %7;
+		return weekdayIndex;
 	}
 	
 	
